@@ -1,5 +1,5 @@
 {
-  "name": "react-app",
+  "name": "node",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node src/app.js",
+    "watch": "node --watch src/app.js",
+    "test": "node --test"
   },
   "dependencies": {
     "react": "^19.3.1",
