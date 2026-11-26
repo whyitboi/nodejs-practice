@@ -1,6 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:http";
+import { loadEnvFile } from "node:process";
 import path from "node:path";
+
+loadEnvFile("./.env");
 
 const hostName = "localhost";
 const port = 8080;
