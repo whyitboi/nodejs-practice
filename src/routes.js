@@ -1,7 +1,7 @@
 import { Router } from "express";
 import path from "node:path";
 
-export const expressRoute = Router();
+const expressRouter = Router();
 
 const pages = {
   "/": "index.html",
@@ -9,16 +9,10 @@ const pages = {
   "/contact-me": "contact-me.html",
 };
 
-//can use a loop
-for (const [route, file] of Object.entries(pages)) {
-  expressRoute.get(route, (req, res) => {
-    res.sendFile(path.join(import.meta.dirname, file));
-  });
-}
+expressRouter.get("/:page", (req, res) => {
+  const file = pages[`/${req.params.page}`];
+  if (file) res.sendFile(path.join(import.meta.dirname, file));
+  else res.status(404).sendFile(path.join(import.meta.dirname, "404.html"));
+});
 
-//or can sendFile a nested get in use. This instead of both of commented-out blocks
-// expressRoute.use((req, res) => {
-//   const file = pages[req.path];
-//   if (file) res.sendFile(path.join(import.meta.dirname, file));
-//   else res.status(404).sendFile(path.join(import.meta.dirname, "404.html"));
-// });
+export { expressRouter };
