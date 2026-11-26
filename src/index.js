@@ -4,27 +4,16 @@ import path from "node:path";
 
 const hostName = "localhost";
 const port = 8080;
-
+const pages = {
+  "/": "index.html",
+  "/about": "about.html",
+  "/contact-me": "contact-me.html",
+};
 const myServer = createServer(async (request, response) => {
   response.statusCode = 200;
   response.setHeader("Content-type", "text/html");
-  let filename;
 
-  switch (request.url) {
-    case "/":
-      filename = "index.html";
-      break;
-    case "/about":
-      filename = "about.html";
-      break;
-    case "/contact-me":
-      filename = "contact-me.html";
-      break;
-    default:
-      response.statusCode = 404;
-      filename = "404.html";
-      break;
-  }
+  const filename = pages[request.url] ? pages[request.url] : "404.html";
 
   const html = await readFile(
     path.join(import.meta.dirname, filename),
