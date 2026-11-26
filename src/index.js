@@ -1,8 +1,9 @@
 import express from "express";
 import path from "path";
 
+/*router start */
 const hostName = "localhost";
-const port = process.env.PORT_ENV ?? 3000;
+const port = process.env.PORT_ENV ?? 8080;
 const pages = {
   "/": "index.html",
   "/about": "about.html",
@@ -16,6 +17,15 @@ for (const [route, file] of Object.entries(pages)) {
     res.sendFile(path.join(import.meta.dirname, file));
   });
 }
+/*router end */
+
+// app.use((req, res) => {
+//   app.get(req.url, (request, response) => {
+//     res.sendFile(
+//       response.sendFile(path.join(import.meta.dirname, pages[req.url])),
+//     );
+//   });
+// });
 
 app.use((req, res) => {
   res.status(404).sendFile(path.join(import.meta.dirname, "404.html"));
